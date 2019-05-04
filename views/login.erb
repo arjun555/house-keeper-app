@@ -9,7 +9,13 @@
 
 OR:
 
-<form action="/session" method="post">
+<form action="/login" method="post">
     <p>Create New User:</p>
-    <button>Login</button>
+    <p><label for="">TYPE:</label>
+    <input type="text" name="account_type" value="<%=@user.account_type%>"></p>
+    <p><label for="">EMAIL:</label>
+    <input type="text" name="email" value="<%=@user.email%>"></p>
+    <button>Create</button>
 </form>
+
+<p><%=@login_status%></p>
