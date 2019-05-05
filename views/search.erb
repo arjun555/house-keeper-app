@@ -1,0 +1,12 @@
+<form action="/search/property" method="get">
+    <p>Search Property</p>
+    <input type="text" name="query"></p>
+</form>
+
+<%if @properties %> 
+    <% @properties.each do |property|%>
+        <div>
+            <a href="/property?id=<%=property["id"]%>"><%=property["address"]%></a>
+        </div>
+    <% end %>
+<% end %>

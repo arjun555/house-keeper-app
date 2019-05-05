@@ -1,0 +1,5 @@
+<%if @properties%>
+    <%@properties.each do |property| %>
+        <p><a href="/property?id=<%=property["id"]%>"><%=property["address"]%></a></p>
+    <%end%>
+<%end%>

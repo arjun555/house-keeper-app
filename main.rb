@@ -6,6 +6,9 @@ require 'active_record'
 require_relative 'db_config'
 require_relative 'domain_api'
 require_relative 'models/user'
+require_relative 'models/property'
+require_relative 'models/user'
+require_relative 'models/comment'
 
 enable :sessions
 
@@ -28,6 +31,11 @@ helpers do
         return false
       end
     end
+
+    def user_properties
+        Property.where(agent_id: session[:user_id])
+    end
+
 end
 
 get '/' do
@@ -55,11 +63,52 @@ get '/home/tenant' do
     erb :tenant_dashboard
 end
 
-get '/serch_property' do
+get '/search' do
+    erb :search
+end
+
+
+get '/search/property' do
     puts params[:query]
     @api_data = DomainAPI.get_access_token()
     @properties = DomainAPI.get_properties_by_terms(params[:query],@api_data["access_token"])
-    erb :agent_dashboard
+    erb :search
+end
+
+get '/property' do
+    params[:id]
+    @api_data = DomainAPI.get_access_token()
+    @property = DomainAPI.get_property_by_Id(params[:id],@api_data["access_token"])
+    @comments = Comment.where(domain_id: params[:id])
+    erb :property
+end
+
+post '/property' do
+    property = Property.new
+    property.domain_id = params[:id]
+    property.agent_id = current_user.id
+    property.save
+    redirect "/property?id=#{property.domain_id}"
+end
+
+get '/agent/properties' do
+    @properties = []
+    properties = Property.where(agent_id: session[:user_id])
+    properties.each do |property|
+        @api_data = DomainAPI.get_access_token()
+        @property = DomainAPI.get_property_by_Id(property["domain_id"],@api_data["access_token"])
+        @properties.push(@property)
+    end
+    erb :agent_properties
+end
+
+post '/comments' do
+    comment = Comment.new
+    comment.content = params[:content]
+    comment.domain_id = params[:domain_id]
+    comment.user_id = current_user.id
+    comment.save
+    redirect "/property?id=#{comment.domain_id}"
 end
 
 get '/login' do

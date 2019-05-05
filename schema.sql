@@ -7,16 +7,17 @@ CREATE TABLE users(
     account_type VARCHAR(500)
 );
 
-CREATE TABLE listings(
+CREATE TABLE properties(
     id SERIAL PRIMARY KEY,
     domain_id TEXT,
     tenant_id INTEGER,
     agent_id INTEGER
 );
 
-CREATE TABLE tickets(
+CREATE TABLE comments(
     id SERIAL PRIMARY KEY,
-    listing_id INTEGER,
+    content TEXT,
+    domain_id TEXT,
     user_id INTEGER,
     ticket_status TEXT,
     ticket_type TEXT,
@@ -24,7 +25,7 @@ CREATE TABLE tickets(
     completed_timestamp TEXT
 );
 
-CREATE TABLE ticket_imgs(
+CREATE TABLE comments_imgs(
     id SERIAL PRIMARY KEY,
     ticket_id INTEGER,
     img_url TEXT
