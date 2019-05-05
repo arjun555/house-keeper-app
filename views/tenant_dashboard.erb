@@ -8,5 +8,12 @@
 </head>
 <body>
     <h1>Tenant Dashboard</h1>
+    <a href="/search">Add Property</a>
+    
+    <%if @properties%>
+        <%@properties.each do |property| %>
+            <p><a href="/property?id=<%=property["id"]%>"><img src="<%=property["photos"].first["fullUrl"]%>" alt="" width="200px"></a></p>
+        <%end%>
+    <%end%>
 </body>
 </html>

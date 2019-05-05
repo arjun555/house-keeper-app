@@ -8,7 +8,13 @@
 </head>
 <body>
     <h1>Agent Dashboard</h1>
-    <a href="/search">Search Property</a>
+    <a href="/search">Add Property</a>
     <a href="/agent/properties">View Properties</a>
+
+    <%if @properties%>
+        <%@properties.each do |property| %>
+            <p><a href="/property?id=<%=property["id"]%>"><img src="<%=property["photos"].first["fullUrl"]%>" alt="" width="200px"></a></p>
+        <%end%>
+    <%end%>
 </body>
 </html>

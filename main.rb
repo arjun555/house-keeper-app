@@ -46,6 +46,7 @@ get '/' do
         elsif current_user.account_type == "tenant"
             redirect '/home/tenant'
         else
+            redirect '/login'
         end
     else
         redirect '/login'
@@ -56,10 +57,24 @@ get '/' do
 end
 
 get '/home/agent' do
+    @properties = []
+    properties = Property.where(agent_id: session[:user_id])
+    properties.each do |property|
+        @api_data = DomainAPI.get_access_token()
+        @property = DomainAPI.get_property_by_Id(property["domain_id"],@api_data["access_token"])
+        @properties.push(@property)
+    end
     erb :agent_dashboard
 end
 
 get '/home/tenant' do
+    @properties = []
+    properties = Property.where(tenant_id: session[:user_id])
+    properties.each do |property|
+        @api_data = DomainAPI.get_access_token()
+        @property = DomainAPI.get_property_by_Id(property["domain_id"],@api_data["access_token"])
+        @properties.push(@property)
+    end
     erb :tenant_dashboard
 end
 
@@ -84,11 +99,46 @@ get '/property' do
 end
 
 post '/property' do
-    property = Property.new
-    property.domain_id = params[:id]
-    property.agent_id = current_user.id
-    property.save
+    property = Property.find_by(domain_id: params[:id])
+    if current_user.account_type == "tenant"
+        if property
+            # property exists in db
+            # property = Property.find_by(domain_id: params[:id])
+            property.tenant_id = current_user.id
+            property.save
+        else
+            # property does not exist, so add
+            property = Property.new
+            property.domain_id = params[:id]
+            property.tenant_id = current_user.id
+            property.save
+        end
+    elsif current_user.account_type == "agent"
+        if property
+            # property exists in db
+            # property = Property.find_by(domain_id: params[:id])
+            binding.pry
+            property.agent_id = current_user.id
+            property.save
+        else
+            # property does not exist, so add
+            property = Property.new
+            property.domain_id = params[:id]
+            property.agent_id = current_user.id
+            property.save
+        end
+    else
+        # error
+    end
     redirect "/property?id=#{property.domain_id}"
+end
+
+def property_has_agent?(domain_id, agent_id)
+    Property.where(domain_id: domain_id, agent_id: agent_id)
+end
+
+def property_has_tenant?(domain_id, tenant_id)
+    Property.where(domain_id: domain_id, tenant_id: tenant_id)
 end
 
 get '/agent/properties' do
