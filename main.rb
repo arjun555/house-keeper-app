@@ -33,7 +33,11 @@ helpers do
     end
 
     def user_properties
-        Property.where(agent_id: session[:user_id])
+        if current_user.account_type == "agent"
+            Property.where(agent_id: session[:user_id])
+        else current_user.account_type == "tenant"
+            Property.where(tenant_id: session[:user_id])
+        end
     end
 
 end

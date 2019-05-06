@@ -1,0 +1,113 @@
+body{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: #373E40;
+}
+
+h1, h2, h3{
+    text-align: center;
+    margin-top: 2px;
+}
+
+img{
+    border: none;
+    border-radius: 2px;
+}
+
+form{
+    margin: 20px;
+}
+
+input{
+    display: block;
+    padding: 10px;
+    margin: 15px;
+    width: 80%;
+    border-bottom: 1px solid #373E40;
+    border-bottom-left-radius: 10px;
+    border-top: none;
+    border-top-left-radius: 10px;
+    border-left: none;
+    border-right: none;
+}
+
+button{
+    padding: 5px;
+    width: 100%;
+    background-color: #B7D5D4;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:link, a:visited {
+    color: #373E40;
+}
+
+
+.radiobuttons{
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
+
+.radiobuttons label{
+    padding: 10px;
+}
+
+.logout{
+    margin: 0px;
+    width: 20%;
+}
+
+.logout button{
+    background-color: white;
+    font-size: 8px;
+    padding: 0;
+    border: none;
+}
+
+.properties{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.properties img{
+    width: 100%;
+}
+
+.property{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.property img{
+    width: 100%;
+}
+
+.property textarea{
+    width: 100%;
+    height: 5vh;
+    border: 1px solid #373E40;
+}
+
+.comment{
+    text-align: start;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 1px solid #373E40;
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: -2px 5px;
+}
+
+/* .colors{
+
+    background-color: #B7D5D4;
+    background-color: #488286;
+    background-color: #373E40;
+    background-color: #305252;
+    background-color: #77878B;
+} */

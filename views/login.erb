@@ -1,21 +1,38 @@
-<form action="/session" method="post">
-    <p>Existing User Login:</p>
-    <p><label for="">EMAIL:</label>
-    <input type="text" name="email"></p>
-    <p><label for="">PASSWORD:</label>
-    <input type="password" name="password"></p>
-    <button>Login</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <form class="login" action="/session" method="post">
+            <p>Log in with existing account</p>
+            <input type="text" name="email" placeholder="Username">
+            <input type="password" name="password" placeholder="Password">
+            <button>Login</button>
+        </form>
 
-OR:
+        <form class="login" action="/login" method="post">
+            <p>Register new account</p>
+            <div class="radiobuttons">
+                <label for="agent">Agent</label>
+                <input type="radio" id="agent" name="account_type"" value="agent">
+                <label for="tenant">Tenant</label>
+                <input type="radio" id="tenant" name="account_type"" value="tenant">
+            </div>
+            <input type="text" name="email" placeholder="Username" value="<%=@user.email%>">
+            <button>Create</button>
+        </form>
 
-<form action="/login" method="post">
-    <p>Create New User:</p>
-    <p><label for="">TYPE:</label>
-    <input type="text" name="account_type" value="<%=@user.account_type%>"></p>
-    <p><label for="">EMAIL:</label>
-    <input type="text" name="email" value="<%=@user.email%>"></p>
-    <button>Create</button>
-</form>
+        <p><%=@login_status%></p>
+    </div>
+</body>
+</html>
 
-<p><%=@login_status%></p>
+
+
+

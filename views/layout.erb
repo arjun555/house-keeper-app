@@ -4,17 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/stylesheets/main.css">
     <title>House Keeper</title>
 </head>
 <body>
-    <%if logged_in?%>
-        Hello <%=current_user.email%>
-        <form action="/session" method="post">
-            <input type="hidden" name="_method" value="delete">
-            <button>Logout</button>
-        </form>
-    <%end%>
-    <a href="/" text-decoration="none"><h1>house keeper</h1></a>
-    <%= yield %>
+    <header>
+        <%if logged_in?%>
+            <form class="logout" action="/session" method="post">
+                <input type="hidden" name="_method" value="delete">
+                <button>Logout</button>
+            </form>
+        <%else%>
+            <form class="logout" action="" method="">
+                <input type="hidden" name="_method" value="delete">
+                <button>Login</button>
+            </form>
+        <%end%>
+        <a href="/" text-decoration="none"><h1>house keeper</h1></a>
+    </header>
+    <main>
+        <%=yield%>
+    </main>
+    <footer>
+    
+    </footer>
 </body>
 </html>

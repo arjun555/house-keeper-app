@@ -1,12 +1,24 @@
-<form action="/search/property" method="get">
-    <p>Search Property</p>
-    <input type="text" name="query"></p>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/search/property" method="get">
+        <p>Search Property</p>
+        <input type="text" name="query"></p>
+        </form>
 
-<%if @properties %> 
-    <% @properties.each do |property|%>
-        <div>
-            <a href="/property?id=<%=property["id"]%>"><%=property["address"]%></a>
-        </div>
+        <%if @properties %> 
+        <% @properties.each do |property|%>
+            <div>
+                <a href="/property?id=<%=property["id"]%>"><%=property["address"]%></a>
+            </div>
+        <% end %>
     <% end %>
-<% end %>
+</body>
+</html>

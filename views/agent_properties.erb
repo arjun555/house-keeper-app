@@ -1,9 +1,21 @@
-<h1>Agent Dashboard</h1>
-<a href="/search">Add Property</a>
-<a href="/agent/properties">View Properties</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Agent Dashboard</h1>
+    <a href="/search">Add Property</a>
+    <a href="/agent/properties">View Properties</a>
 
-<%if @properties%>
-    <%@properties.each do |property| %>
-        <p><a href="/property?id=<%=property["id"]%>"><img src="<%=property["photos"].first["fullUrl"]%>" alt="" width="200px"></a></p>
+    <%if @properties%>
+        <%@properties.each do |property| %>
+            <p><a href="/property?id=<%=property["id"]%>"><img src="<%=property["photos"].first["fullUrl"]%>" alt=""></a></p>
+        <%end%>
     <%end%>
-<%end%>
+</body>
+</html>

@@ -4,16 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/stylesheets/main.css">
     <title>Document</title>
 </head>
 <body>
     <h1>Tenant Dashboard</h1>
     <a href="/search">Add Property</a>
-    
-    <%if @properties%>
-        <%@properties.each do |property| %>
-            <p><a href="/property?id=<%=property["id"]%>"><img src="<%=property["photos"].first["fullUrl"]%>" alt="" width="200px"></a></p>
+
+    <div class="properties">
+        <%if @properties%>
+            <%@properties.each do |property| %>
+                <p><a href="/property?id=<%=property["id"]%>"><img src="<%=property["photos"].first["fullUrl"]%>" alt="" width="200px"></a></p>
+            <%end%>
         <%end%>
-    <%end%>
+    </div>
 </body>
 </html>

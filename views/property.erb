@@ -4,34 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/stylesheets/main.css">
     <title>Document</title>
 </head>
 <body>
-    <img src="<%=@property["photos"].first["fullUrl"]%>" alt="" width="500px">
-    <p>Address: <%=@property["address"]%></p>
-    <p>Bathrooms: <%=@property["bathrooms"]%> Bedrooms: <%=@property["bedrooms"]%></p>
+    <div class="property">
+        <img src="<%=@property["photos"].first["fullUrl"]%>" alt="">
+        <p>Address: <%=@property["address"]%></p>
+        <p>Bathrooms: <%=@property["bathrooms"]%> Bedrooms: <%=@property["bedrooms"]%></p>
 
-    <%if !user_properties.find_by(domain_id: @property["id"])%>
-        <form action="/property" method="post">
-            <input type="hidden" name="id" value="<%=@property["id"]%>"></p>
-            <button>Add Property</button>
+        <%if !user_properties.find_by(domain_id: @property["id"])%>
+            <form action="/property" method="post">
+                <input type="hidden" name="id" value="<%=@property["id"]%>"></p>
+                <button>Add Property</button>
+            </form>
+        <%end%>
+
+        <form action="/comments" method="post">
+            <input type="hidden" name="domain_id" value="<%=@property["id"]%>">
+            <textarea name="content" placeholder="add comment"></textarea>
+            <button>POST</button>
         </form>
-    <%end%>
 
-
-    <form action="/comments" method="post">
-        <input type="hidden" name="domain_id" value="<%=@property["id"]%>">
-        <textarea name="content"></textarea>
-        <button>POST</button>
-    </form>
-
-    <%if @comments%>
-        <% @comments.each do |comment|%>
-            <div>
-                
-                <%= comment.content%>
-            </div>
-        <%end%>    
-    <%end%>
+        <%if @comments%>
+            <% @comments.each do |comment|%>
+                <div class="comment">
+                    <p><%= comment.content%></p>
+                    <p>Comment by: <%= User.find_by(id: comment.user_id).email%></p>
+                </div>
+            <%end%>    
+        <%end%>
+    </div>
 </body>
 </html>
